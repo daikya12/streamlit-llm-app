@@ -38,3 +38,8 @@ tornado==6.5.2
 typing_extensions==4.15.0
 tzdata==2025.2
 urllib3==2.5.0
+langchain-openai==0.2.1
+openai==1.47.0
+tiktoken>=0.7.0
+langchain==0.3.0
+python-dotenv==1.0.0
