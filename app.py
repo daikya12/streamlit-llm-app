@@ -95,7 +95,7 @@ def get_llm_response(user_text: str, role_key: str) -> tuple[str, dict]:
 
     system_prompt = ROLE_SYSTEM_PROMPTS.get(role_key, "You are a helpful assistant. Use Japanese.")
 
-    llm = ChatOpenAI(model_name=MODEL_NAME, temperature=TEMPERATURE)
+    llm = ChatOpenAI(model_name=MODEL_NAME, temperature=TEMPERATURE, api_key=os.getenv("OPENAI_API_KEY"))
 
     messages = [
         SystemMessage(content=system_prompt),
