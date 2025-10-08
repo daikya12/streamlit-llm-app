@@ -1,19 +1,19 @@
+import os, importlib
+def _v(name):
+    try:
+        m = importlib.import_module(name)
+        return getattr(m, "__version__", "unknown")
+    except Exception as e:
+        return f"NG ({e})"
+print("openai =", _v("openai"))
+print("langchain_openai =", _v("langchain_openai"))
+print("Env PROXY =", {k: os.getenv(k) for k in ["OPENAI_PROXY","HTTPS_PROXY","ALL_PROXY"]})
+
 from dotenv import load_dotenv
 load_dotenv()
 
-import os, importlib
-def v(m):
-    try:
-        mod = importlib.import_module(m)
-        return getattr(mod, "__version__", "unknown")
-    except Exception as e:
-        return f"NG ({e})"
-print("openai=", v("openai"))
-print("langchain_openai=", v("langchain_openai"))
-print("Env proxies=", {k: os.getenv(k) for k in ["OPENAI_PROXY","HTTPS_PROXY","ALL_PROXY"]})
-
 # app.py
-#import os
+import os
 import streamlit as st
 
 # Lesson8スタイル: ChatOpenAI と schema メッセージ
