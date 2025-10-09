@@ -1,14 +1,3 @@
-import os, importlib
-def _v(name):
-    try:
-        m = importlib.import_module(name)
-        return getattr(m, "__version__", "unknown")
-    except Exception as e:
-        return f"NG ({e})"
-print("openai =", _v("openai"))
-print("langchain_openai =", _v("langchain_openai"))
-print("Env PROXY =", {k: os.getenv(k) for k in ["OPENAI_PROXY","HTTPS_PROXY","ALL_PROXY"]})
-
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -18,7 +7,7 @@ import streamlit as st
 
 # Lesson8スタイル: ChatOpenAI と schema メッセージ
 from langchain_openai import ChatOpenAI
-from langchain.schema import SystemMessage, HumanMessage
+from langchain_core.messages import SystemMessage, HumanMessage
 
 # ======================
 # 設定（モデルなど）
@@ -106,7 +95,7 @@ def get_llm_response(user_text: str, role_key: str) -> tuple[str, dict]:
 
     system_prompt = ROLE_SYSTEM_PROMPTS.get(role_key, "You are a helpful assistant. Use Japanese.")
 
-    llm = ChatOpenAI(model_name=MODEL_NAME, temperature=TEMPERATURE, api_key=os.getenv("OPENAI_API_KEY"))
+    llm = ChatOpenAI(model=MODEL_NAME, temperature=TEMPERATURE, api_key=os.getenv("OPENAI_API_KEY"))
 
     messages = [
         SystemMessage(content=system_prompt),
